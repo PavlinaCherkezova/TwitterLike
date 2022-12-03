@@ -4,6 +4,9 @@ Angular app for implementing best practices with some Twitter like look and func
 
 # Getting started
 
+* npm v.16.13.0 and higher
+* Angular v.15.0.0
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
