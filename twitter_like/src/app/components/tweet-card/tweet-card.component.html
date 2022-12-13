@@ -1,0 +1,36 @@
+<div class="card" *ngFor="let tweet of (tweetService.tweetsSubmitted$ | async)?.reverse()">
+  <div class="column_left">
+    <fa-icon class="icon" [icon]="icons.userIcon" size="2xl"></fa-icon>
+  </div>
+
+  <div class="column_right">
+    <div class="row">
+      <h3>{{tweet.author}}</h3>
+      <h3 class="not-bold">{{tweet.nickname}}</h3>
+
+      <h5 class="not-bold">{{tweet.time.toDateString()}}</h5>
+    </div>
+    <div class="content">
+      <p class="text">{{tweet.text}}</p>
+    </div>
+
+    <img *ngIf="tweet.picture" src={{tweet.picture}}>
+    <div class="reactions">
+      <button class="btn">
+        <fa-icon [icon]="icons.comment" size="lg"></fa-icon>
+        {{tweet.commentsCount}}
+      </button>
+      <button class="btn">
+        <fa-icon [icon]="icons.retweet" size="lg"></fa-icon>
+        {{tweet.retweetsCount}}
+      </button>
+      <button class="btn">
+        <fa-icon [icon]="icons.heart" size="lg"></fa-icon>
+        {{tweet.likesCount}}
+      </button>
+      <button class="btn">
+        <fa-icon [icon]="icons.share" size="lg"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

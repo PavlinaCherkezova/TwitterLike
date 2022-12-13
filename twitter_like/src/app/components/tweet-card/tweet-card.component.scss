@@ -1,0 +1,49 @@
+.btn {
+  border: none;
+  background:transparent;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.row {
+  flex: 1;
+  flex-direction: row;
+  display: flex;
+  gap: 10px;
+}
+
+.text {
+  margin: 0 20px;
+}
+
+.content{
+  height: 95px;
+}
+
+.reactions {
+  display: flex;
+  gap:35px;
+}
+
+.column_left {
+  flex: 0.5;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.column_right {
+  flex: 2;
+  flex-direction: column;
+  display: flex;
+}
+
+.not-bold {
+  font-weight: normal;
+}
