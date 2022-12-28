@@ -1,4 +1,4 @@
-<div class="card" *ngFor="let tweet of (tweetService.tweetsSubmitted$ | async)?.reverse()">
+<div class="card" *ngIf="tweet">
   <div class="column_left">
     <fa-icon class="icon" [icon]="icons.userIcon" size="2xl"></fa-icon>
   </div>
@@ -16,19 +16,19 @@
 
     <img *ngIf="tweet.picture" src={{tweet.picture}}>
     <div class="reactions">
-      <button class="btn">
+      <button class="btn" (click)="onAddComment()">
         <fa-icon [icon]="icons.comment" size="lg"></fa-icon>
-        {{tweet.commentsCount}}
+        {{tweet.comment.length}}
       </button>
-      <button class="btn">
+      <button class="btn" (click)="onRetweet()">
         <fa-icon [icon]="icons.retweet" size="lg"></fa-icon>
         {{tweet.retweetsCount}}
       </button>
-      <button class="btn">
+      <button class="btn" (click)="onLike()">
         <fa-icon [icon]="icons.heart" size="lg"></fa-icon>
         {{tweet.likesCount}}
       </button>
-      <button class="btn">
+      <button class="btn" *ngIf=!isReply (click)="onShare()">
         <fa-icon [icon]="icons.share" size="lg"></fa-icon>
       </button>
     </div>

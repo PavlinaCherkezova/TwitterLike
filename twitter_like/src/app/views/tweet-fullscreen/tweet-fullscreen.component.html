@@ -1,0 +1,8 @@
+<div class="parent">
+  <app-tweet-card [tweet]="tweet" [isReply]="false"></app-tweet-card>
+  <div *ngFor="let comment of tweet!.comment.reverse()">
+    <app-tweet-card [tweet]="comment" [isReply]="false"></app-tweet-card>
+  </div>
+
+  <app-input-card [tweetId]="tweet!.id" [isComment]="true"></app-input-card>
+</div>
