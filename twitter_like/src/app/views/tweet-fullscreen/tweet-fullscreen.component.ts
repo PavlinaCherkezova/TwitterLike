@@ -15,16 +15,12 @@ export class TweetFullscreenComponent implements OnInit {
 
   public ngOnInit() {
     this.listenForIdChange();
-   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  // public ngOnDestroy() {
-  //   this.router.routeReuseStrategy.shouldReuseRoute = () => true;
-  // }
 
   private listenForIdChange() {
     this.activatedRoute.params.subscribe((params) => {
-      this.tweet = this.tweetSubmitService.getTweets().find((tweet) => tweet.id = params['id']);
+      this.tweet = this.tweetSubmitService.getTweetById(params['id']);
     })
   }
 
