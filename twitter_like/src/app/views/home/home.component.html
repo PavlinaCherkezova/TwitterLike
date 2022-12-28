@@ -1,11 +1,7 @@
 <div class="parent">
-    <div class="card order">
-        <div class="first-row">
-            <fa-icon class="icon" [icon]="userIcon" size="2xl"></fa-icon>
-            <textarea class="input" type="text" placeholder="Your opinion..." [(ngModel)]="input"></textarea>
-        </div>
-        <button class="button" (click)="onTweetSubmit()">Tweet</button>
-    </div>
+    <app-input-card></app-input-card>
     
-    <app-tweet-card></app-tweet-card>
+    <div *ngFor="let tweet of (tweetService.tweetsSubmitted$ | async)?.reverse()">
+        <app-tweet-card [tweet]="tweet" [isReply]="false"></app-tweet-card>
+    </div>
 </div>

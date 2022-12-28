@@ -1,0 +1,9 @@
+<div class="card order">
+  <div class="first-row">
+      <fa-icon class="icon" [icon]="userIcon" size="2xl"></fa-icon>
+      <textarea class="input" type="text" placeholder="Your opinion..." [(ngModel)]="input"></textarea>
+  </div>
+  
+  <button *ngIf=!isComment class="button" (click)="onTweetSubmit()">Tweet</button>
+  <button *ngIf=isComment class="button" (click)="onCommentSubmit()">Reply</button>
+</div>
