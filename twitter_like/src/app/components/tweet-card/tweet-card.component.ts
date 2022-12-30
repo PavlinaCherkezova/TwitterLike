@@ -3,6 +3,7 @@ import { TweetSubmitService } from '../../services/tweet-submit.service';
 import { faHeart, faRetweet, faComment, faArrowUpFromBracket, faPersonDotsFromLine } from '@fortawesome/free-solid-svg-icons';
 import { Tweet } from '../../models/tweet';
 import { Router } from '@angular/router';
+import { AppParameters } from '../../AppParameters';
 
 @Component({
   selector: 'app-tweet-card',
@@ -23,6 +24,15 @@ export class TweetCardComponent implements OnInit {
   public ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = function() { return false; };
   }
+  
+  public onImageLoad(event: Event) {
+    const image = event.target as HTMLImageElement;
+    if(image.width > AppParameters.image.max_width || image.height > AppParameters.image.max_height){
+      let ratio = Math.min(AppParameters.image.max_width / image.width, AppParameters.image.max_height / image.height);
+      image.width *= ratio;
+      //image.height *= ratio;
+    }
+  };
 
   public onAddComment(): void {
     this.router.navigate(['tweet', this.tweet!.id]);

@@ -64,11 +64,11 @@ export class TweetSubmitService {
     this.tweets.length > 0 && loopOver(this.tweets);
   }
 
-  public generateTweet(input: string): Tweet {
-    return { id: uuid.v4(), author: this.loggedInUser, nickname: `@${this.loggedInUser}`, time: new Date(), text: input, picture: undefined, comment: [], likesCount: 0, retweetsCount: 0 }
+  public generateTweet(input: string, imageSrc: string): Tweet {
+    return { id: uuid.v4(), author: this.loggedInUser, nickname: `@${this.loggedInUser}`, time: new Date(), text: input, picture: imageSrc, comment: [], likesCount: 0, retweetsCount: 0 }
   }
 
-  public generateComment(input: string): Tweet {
-    return { id: uuid.v4(), author: this.loggedInUser, nickname: `@${this.loggedInUser}`, time: new Date(), text: input, picture: undefined, comment: [], likesCount: 0, retweetsCount: 0 }
+  public generateComment(input: string, imageSrc: string): Tweet {
+    return { id: uuid.v4(), author: this.loggedInUser, nickname: `@${this.loggedInUser}`, time: new Date(), text: input, picture: imageSrc, comment: [], likesCount: 0, retweetsCount: 0 }
   }
 }

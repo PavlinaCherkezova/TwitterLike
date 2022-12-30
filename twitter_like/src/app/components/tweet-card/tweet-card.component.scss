@@ -15,13 +15,16 @@
 }
 
 .text {
-  margin: 0 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  white-space: pre-wrap;
+  max-width: 380px;
+  overflow-wrap: break-word;
 }
 
-.content{
-  height: 95px;
+.image{
+  padding-right: 20px;
 }
-
 
 .not-bold {
   font-weight: normal;

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faPersonDotsFromLine } from '@fortawesome/free-solid-svg-icons';
 import { TweetSubmitService } from '../../services/tweet-submit.service';
-
+import { AppParameters } from '../../AppParameters';
 
 @Component({
   selector: 'app-input-card',
@@ -19,19 +19,27 @@ export class InputCardComponent implements OnInit {
 
   public userIcon = faPersonDotsFromLine;
   public input: string = '';
+  private imageSrc: string = '';
 
   constructor(public tweetService: TweetSubmitService) { }
 
   ngOnInit() {
+    const textArea = document.querySelector('textarea');
+    textArea!.addEventListener('keyup', () => this.dynamicallyResize(textArea));
   }
 
+  public dynamicallyResize(el: HTMLTextAreaElement | null): void {
+    if(Math.ceil(el!.getBoundingClientRect().height) < el!.scrollHeight){
+      el!.style.height = (el!.scrollHeight + 25)+"px";
+    }
+  }
   public onCommentSubmit(): void {
-    this.tweetService.addComment(this.tweetId!, this.tweetService.generateComment(this.input));
+    this.tweetService.addComment(this.tweetId!, this.tweetService.generateComment(this.input, this.imageSrc));
     this.input = '';
   }
 
   public onTweetSubmit(): void {
-    this.tweetService.addTweet(this.tweetService.generateTweet(this.input));
+    this.tweetService.addTweet(this.tweetService.generateTweet(this.input, this.imageSrc));
     this.input = '';
   }
 
@@ -44,14 +52,17 @@ export class InputCardComponent implements OnInit {
       let blob = imageData.getAsFile();
       let reader = new FileReader();
 
-      reader.onload = function (e) {
-        if (e.target && e.target.result){
+      reader.onload = (e) => {
+        if (e.target && e.target.result) {
+          this.imageSrc = e.target!.result!.toString();
+
           let img = new Image();
-          img.src = e.target!.result!.toString();
-          img.width = 128;
-          img.height = 128;
+          img.src = this.imageSrc;
+          let ratio = Math.min(AppParameters.image.max_width / img.width, AppParameters.image.max_height / img.height);
+          img.width *= ratio;
+          img.height *= ratio;
           img.style.margin = '5px';
-  
+
           document.getElementById('images-container')!.appendChild(img);
         }
       }

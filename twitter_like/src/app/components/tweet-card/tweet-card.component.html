@@ -10,11 +10,10 @@
 
       <h5 class="not-bold">{{tweet.time.toDateString()}}</h5>
     </div>
-    <div>
-      <p class="text">{{tweet.text}}</p>
-    </div>
 
-    <img *ngIf="tweet.picture" src={{tweet.picture}}>
+    <span class="text">{{tweet.text}}</span>
+
+    <img class="image" *ngIf="tweet.picture" (load)="onImageLoad($event)" src={{tweet.picture}}>
     <div class="reactions">
       <button class="btn" (click)="onAddComment()">
         <fa-icon [icon]="icons.comment" size="lg"></fa-icon>

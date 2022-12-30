@@ -17,6 +17,8 @@
 .column_left {
     flex: 0.5;
     min-height: 100px;
+    min-width: 100px;
+    max-width: 100px;
     flex-direction: column;
     display: flex;
     gap: 15px;
