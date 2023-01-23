@@ -1,0 +1,21 @@
+<h2 class="title">Join TwitterLike</h2>
+<div class="parent">
+  <form class="card" [formGroup]="loginForm" >
+    <div class="column_right">
+      
+      <div class="first-row">
+        <input class="input_field" placeholder="Username" formControlName="username">
+      </div>
+
+      <div class="first-row">
+        <input type="password" class="input_field" placeholder="Password" formControlName="password">
+      </div>
+
+      <div class="first-row">
+        <button class="button btn_register" type="submit" (click)="onRegister()">Register</button>
+        <button class="button" type="submit" (click)="onLogin()" >Log in</button>
+      </div>
+    </div>
+
+  </form>
+</div>
