@@ -1,7 +1,18 @@
 <div class="parent">
-    <app-input-card></app-input-card>
+    <div class="row">
+        <div class="column_left size">
+            <app-side-menu></app-side-menu>
+        </div>
+
+        <div class="column_right spacing">
+            <app-input-card></app-input-card>
     
-    <div *ngFor="let tweet of (tweetService.tweetsSubmitted$ | async)?.reverse()">
-        <app-tweet-card [tweet]="tweet" [isReply]="false"></app-tweet-card>
+            <div *ngFor="let tweet of (tweetService.tweetsSubmitted$ | async)?.reverse()">
+                <app-tweet-card [tweet]="tweet" [isReply]="false"></app-tweet-card>
+            </div>
+        </div>
+
+        <div class="column_right spacing">
+        </div>
     </div>
 </div>
