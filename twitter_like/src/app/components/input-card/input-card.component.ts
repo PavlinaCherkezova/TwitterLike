@@ -34,7 +34,7 @@ export class InputCardComponent implements OnInit {
     }
   }
   public onCommentSubmit(): void {
-    this.tweetService.addComment(this.tweetId!, this.tweetService.generateComment(this.input, this.imageSrc));
+    this.tweetService.addComment(this.tweetId!, this.tweetService.generateTweet(this.input, this.imageSrc));
     this.input = '';
   }
 
