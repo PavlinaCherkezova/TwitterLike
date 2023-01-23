@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { Tweet } from '../models/tweet';
 import * as uuid from "uuid";
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,8 @@ export class TweetSubmitService {
 
   public tweetsSubmitted$ = new ReplaySubject<Tweet[]>(1);
   private tweets: Tweet[] = [];
-  private loggedInUser = 'John Doe';
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
     const savedTweets = localStorage.getItem('tweets');
     this.tweets = savedTweets && JSON.parse(savedTweets!) || [];
 
@@ -51,6 +51,20 @@ export class TweetSubmitService {
     return findTweet(this.tweets, id);
   }
 
+  public getTweetByUser(author: string): Tweet[] | [] {
+    const findTweet = (array: Tweet[], author: string) => {
+      let result: Tweet[] = [];
+      array.some(
+        (child) =>
+          (child.author === author && (result.push(child))) ||
+          (result = findTweet(child.comment || [], author))
+      );
+      return result;
+    };
+
+    return findTweet(this.tweets, author);
+  }
+
   public fixDateFormat(): void {
     const loopOver = (array: Tweet[]) => {
       array.forEach(
@@ -65,10 +79,7 @@ export class TweetSubmitService {
   }
 
   public generateTweet(input: string, imageSrc: string): Tweet {
-    return { id: uuid.v4(), author: this.loggedInUser, nickname: `@${this.loggedInUser}`, time: new Date(), text: input, picture: imageSrc, comment: [], likesCount: 0, retweetsCount: 0 }
+    return { id: uuid.v4(), author: this.authenticationService.loggedUser!.credentials.username, nickname: this.authenticationService.loggedUser!.nickname, time: new Date(), text: input, picture: imageSrc, comment: [], likesCount: 0, retweetsCount: 0 }
   }
 
-  public generateComment(input: string, imageSrc: string): Tweet {
-    return { id: uuid.v4(), author: this.loggedInUser, nickname: `@${this.loggedInUser}`, time: new Date(), text: input, picture: imageSrc, comment: [], likesCount: 0, retweetsCount: 0 }
-  }
 }
