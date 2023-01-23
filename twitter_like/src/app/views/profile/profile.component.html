@@ -1,0 +1,28 @@
+<div class="parent">
+    <div class="row">
+        <div class="column_left size">
+            <app-side-menu></app-side-menu>
+        </div>
+
+        <div class="column_right spacing">
+            <div>
+                <div class="background-picture"></div>
+                <div class="image_border">
+                    <img class="image" *ngIf="authenticationService.loggedUser"
+                        src={{authenticationService.loggedUser.avatar}}>
+                </div>
+                <h3 class="text">{{authenticationService.loggedUser?.credentials?.username}}</h3>
+                <h3 class="text">{{authenticationService.loggedUser?.nickname}}</h3>
+            </div>
+            <div *ngIf="authenticationService.loggedUser">
+                <div
+                    *ngFor="let tweet of tweetService.getTweetByUser(authenticationService.loggedUser.credentials.username).reverse()">
+                    <app-tweet-card [tweet]="tweet" [isReply]="false"></app-tweet-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="column_right spacing">
+        </div>
+    </div>
+</div>
